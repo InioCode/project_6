@@ -11,7 +11,7 @@ import org.junit.Assert;
 public class TestFeline {
 
     @Spy
-    Feline spyFeline;
+    private Feline spyFeline;
 
    @Test
     public void getMeatCallGetFoodWithReturnAnimalKind(){
