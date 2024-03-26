@@ -13,8 +13,10 @@ public class TestFeline {
     @Spy
     private Feline spyFeline;
 
+    Feline realFeline = new Feline();
+
    @Test
-    public void getMeatCallGetFoodWithReturnAnimalKind(){
+    public void eatMeatCallGetFoodWithReturnAnimalKind(){
        try {
            spyFeline.eatMeat();
        } catch (Exception e) {
@@ -31,7 +33,7 @@ public class TestFeline {
 
    @Test
     public void getFamilyReturnCats(){
-       Assert.assertEquals("Кошачьи",spyFeline.getFamily());
+       Assert.assertEquals("Кошачьи",realFeline.getFamily());
    }
 
    @Test
