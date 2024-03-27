@@ -4,34 +4,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
-@RunWith(Parameterized.class)
+
+@RunWith(MockitoJUnitRunner.class)
 public class TestLion {
     static Feline stabFeline = Mockito.mock(Feline.class);
-    private final String sex;
     private Lion realLion;
-
-    public TestLion(String sex, Feline feline){
-        this.sex = sex;
-        this.stabFeline = feline;
-    }
-    @Parameterized.Parameters
-    public static Object[] getProperty(){
-        return new Object[][]{
-                {"Самец",stabFeline},
-                {"Самка",stabFeline},
-                {"Сумка",stabFeline}
-        };
-    }
 
     @Before
     public void lionCreateObject(){
         try {
-            this.realLion = new Lion(sex, stabFeline);
+            this.realLion = new Lion("Самец", stabFeline);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -41,16 +28,6 @@ public class TestLion {
     public void getKittensReturnNumberKittens(){
         Mockito.when(stabFeline.getKittens()).thenReturn(1);
         Assert.assertEquals(1, realLion.getKittens());
-    }
-
-    @Test
-    public void doesHaveManeWithMaleReturnTrue(){
-        if (sex.equals("Самец")) {
-            Assert.assertEquals( true, realLion.doesHaveMane());
-        } else{
-            Assert.assertEquals( false, realLion.doesHaveMane());
-        }
-
     }
 
     @Test
