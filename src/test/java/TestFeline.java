@@ -20,15 +20,14 @@ public class TestFeline {
        try {
            spyFeline.eatMeat();
        } catch (Exception e) {
-           throw new RuntimeException(e);
+           Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
        }
 
        try {
            Mockito.verify(spyFeline, Mockito.times(1)).getFood("Хищник");
        } catch (Exception e) {
-           throw new RuntimeException(e);
+           Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
        }
-
    }
 
    @Test

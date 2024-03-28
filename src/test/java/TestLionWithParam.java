@@ -8,14 +8,15 @@ import org.junit.runners.Parameterized;
 import org.mockito.Mockito;
 
 @RunWith(Parameterized.class)
-public class ParameterizedTestLion {
+public class TestLionWithParam {
     static Feline stabFeline = Mockito.mock(Feline.class);
     private final String sex;
     private Lion realLion;
-    public ParameterizedTestLion(String sex, Feline feline){
+    public TestLionWithParam(String sex, Feline feline){
         this.sex = sex;
         this.stabFeline = feline;
     }
+
     @Parameterized.Parameters
     public static Object[] getProperty(){
         return new Object[][]{
@@ -26,11 +27,11 @@ public class ParameterizedTestLion {
     }
 
     @Before
-    public void lionCreateObject(){
+    public void lionCreateObject() {
         try {
             this.realLion = new Lion(sex, stabFeline);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
         }
     }
 
@@ -38,10 +39,11 @@ public class ParameterizedTestLion {
     public void doesHaveManeWithMaleReturnTrue(){
         if (sex.equals("Самец")) {
             Assert.assertEquals( true, realLion.doesHaveMane());
-        } else{
+        } else if (sex.equals("Самка")){
             Assert.assertEquals( false, realLion.doesHaveMane());
+        } else {
+            Exception thisException = Assert.assertThrows(Exception.class, () -> realLion.doesHaveMane());
         }
-
     }
 
 }

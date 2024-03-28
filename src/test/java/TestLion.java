@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
@@ -35,12 +35,12 @@ public class TestLion {
         try {
             Mockito.when(stabFeline.getFood(Mockito.anyString())).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
         }
         try {
             Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), realLion.getFood());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
         }
     }
 }
