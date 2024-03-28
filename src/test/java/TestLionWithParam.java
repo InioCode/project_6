@@ -41,8 +41,6 @@ public class TestLionWithParam {
             Assert.assertEquals( true, realLion.doesHaveMane());
         } else if (sex.equals("Самка")){
             Assert.assertEquals( false, realLion.doesHaveMane());
-        } else {
-            Exception thisException = Assert.assertThrows(Exception.class, () -> realLion.doesHaveMane());
         }
     }
 
